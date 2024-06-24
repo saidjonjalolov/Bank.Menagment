@@ -9,5 +9,6 @@ namespace Bank.Management.Console.Brokers.Storages.Bank
         bool MakingDeposit(decimal accountNumberForBank, decimal balance);
         decimal WithdarwMoney(decimal accountNumberForBank, decimal balance);
         decimal GetBalance(decimal accountNumberForBank);
+        decimal WithdrawMoney(decimal accountNumberForBank, decimal balance);
     }
 }
