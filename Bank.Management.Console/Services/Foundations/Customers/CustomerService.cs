@@ -5,10 +5,11 @@
 using Bank.Management.Console.Brokers.Loggings;
 using Bank.Management.Console.Brokers.Storages.BankStorage.Customers;
 using Bank.Management.Console.Models;
+using Bank_management.Services.Foundation.Banks.Customers;
 
-namespace Bank_management.Services.Foundation.Banks.Customers
+namespace Bank.Management.Console.Services.Foundations.Customers
 {
-    internal class CustomerService : ICustomerService
+    internal class CustomerService
     {
         private readonly ICustomerBroker customerBroker;
         private readonly ILoggingBroker loggingBroker;
