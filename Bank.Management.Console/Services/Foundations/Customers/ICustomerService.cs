@@ -16,5 +16,6 @@ namespace Bank.Management.Console.Services.Foundations.Customers
             decimal secondAccountNumber,
             decimal money);
         string GetAllCustomer();
+        decimal GetBalanceInClient(decimal accountNumber);
     }
 }

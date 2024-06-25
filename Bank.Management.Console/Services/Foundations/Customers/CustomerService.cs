@@ -152,5 +152,26 @@ namespace Bank.Management.Console.Services.Foundations.Customers
 
             return clientInfo;
         }
+
+        public decimal GetBalanceInClient(decimal accountNumber)
+        {
+            decimal resultGetBalance =
+    this.customerBroker.GetBalance(accountNumber);
+
+            if (resultGetBalance == 0)
+            {
+                this.loggingBroker.LogError("Account number not found.");
+                return resultGetBalance;
+            }
+
+            this.loggingBroker.LogInformation("The amount of money in the customer's balance was found successfully.");
+            return resultGetBalance;
+        }
+
+        private decimal InvalidGetBalanceInClient()
+        {
+            this.loggingBroker.LogError("This accountNumber was not found in the database.");
+            return 0;
+        }
     }
 }
