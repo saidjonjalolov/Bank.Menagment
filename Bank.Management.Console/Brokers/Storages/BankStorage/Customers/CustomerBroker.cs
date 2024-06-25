@@ -56,7 +56,7 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
                 }
             }
 
-            string newClient = $"{customer.Name}*{customer.AccountNumber}";
+            string newClient = $"{customer.Name}*{customer.AccountNumber}*{customer.Balance}\n";
             File.AppendAllText(filePath, newClient);
             return true;
         }
@@ -74,6 +74,7 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
 
                 if (Convert.ToDecimal(clientInfo[firstIndex].Split('*')[2]) >= money)
                 {
+                    File.WriteAllText(filePath, string.Empty);
                     clientInfo[firstIndex].Split('*')[2] =
                         (Convert.ToDecimal(clientInfo[firstIndex].Split('*')[2]) - money).ToString();
                     clientInfo[secondIndex].Split('*')[2] =
@@ -132,7 +133,7 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
         {
             bool isFileThere = File.Exists(filePath);
 
-            if (isFileThere is true)
+            if (isFileThere is false)
             {
                 File.Create(filePath).Close();
             }
