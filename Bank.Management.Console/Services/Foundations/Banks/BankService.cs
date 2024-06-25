@@ -7,7 +7,7 @@ using Bank.Management.Console.Brokers.Storages.BankStorage;
 
 namespace Bank.Management.Console.Services.Foundations.Banks
 {
-    internal class BankService
+    internal class BankService : IBankService
     {
         private readonly IBankStorageBroker bankBroker;
         private readonly ILoggingBroker loggingBroker;

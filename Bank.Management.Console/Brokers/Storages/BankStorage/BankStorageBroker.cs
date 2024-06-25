@@ -4,7 +4,7 @@
 
 namespace Bank.Management.Console.Brokers.Storages.BankStorage
 {
-    internal class BankStorageBroker
+    internal class BankStorageBroker : IBankStorageBroker
     {
 
         private readonly string filePath = "../../../Assets/BankFileDB.txt";
@@ -99,7 +99,7 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage
         {
             bool isFileThere = File.Exists(filePath);
 
-            if (isFileThere is true)
+            if (isFileThere is false)
             {
                 File.Create(filePath).Close();
             }
