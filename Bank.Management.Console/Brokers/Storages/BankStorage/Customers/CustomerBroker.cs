@@ -72,15 +72,16 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
             string[] clientInfo = File.ReadAllLines(filePath);
             File.WriteAllText(filePath, string.Empty);
 
-            string[] firstClientInfoLine = clientInfo[firstIndex].Split('*');
-            string[] secondClinetInfoLine = clientInfo[secondIndex].Split('*');
-
-            if (Convert.ToDecimal(firstClientInfoLine[2]) >= money)
+            if (IsAccountNumberCheck(firstAccountNumber)
+               && IsAccountNumberCheck(secondAccountNumber))
             {
                 int firstIndex = this.GetIndex(firstAccountNumber);
                 int secondIndex = this.GetIndex(secondAccountNumber);
 
-                if (Convert.ToDecimal(clientInfo[firstIndex].Split('*')[2]) >= money)
+                string[] firstClientInfoLine = clientInfo[firstIndex].Split('*');
+                string[] secondClinetInfoLine = clientInfo[secondIndex].Split('*');
+
+                if (Convert.ToDecimal(firstClientInfoLine[2]) >= money)
                 {
                     File.WriteAllText(filePath, string.Empty);
                     decimal firstAccount = Convert.ToDecimal(firstClientInfoLine[2]);
