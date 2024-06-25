@@ -144,5 +144,28 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
                 File.Create(filePath).Close();
             }
         }
+
+        public decimal GetBalance(decimal accountNumber)
+        {
+            if (accountNumber.ToString().Length >= 16)
+            {
+                string[] accountLines = File.ReadAllLines(filePath);
+
+                for (int itarator = 0; itarator < accountLines.Length; itarator++)
+                {
+                    string accountLine = accountLines[itarator];
+                    string[] clientInfo = accountLine.Split('*');
+
+                    if (clientInfo[0].Contains(accountNumber.ToString()))
+                    {
+                        return Convert.ToDecimal(clientInfo[2]);
+                    }
+                }
+
+                return 0;
+            }
+
+            return 0;
+        }
     }
 }
