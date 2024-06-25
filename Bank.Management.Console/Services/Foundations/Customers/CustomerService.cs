@@ -143,7 +143,7 @@ namespace Bank.Management.Console.Services.Foundations.Customers
 
             if (clientInfo is not null)
             {
-                this.loggingBroker.LogInformation(clientInfo.ToString());
+                this.loggingBroker.LogInfo(clientInfo.ToString());
             }
             else
             {

@@ -156,7 +156,7 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
                     string accountLine = accountLines[itarator];
                     string[] clientInfo = accountLine.Split('*');
 
-                    if (clientInfo[0].Contains(accountNumber.ToString()))
+                    if (clientInfo[1].Contains(accountNumber.ToString()))
                     {
                         return Convert.ToDecimal(clientInfo[2]);
                     }
