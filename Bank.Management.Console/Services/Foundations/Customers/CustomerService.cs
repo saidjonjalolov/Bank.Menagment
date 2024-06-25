@@ -136,5 +136,21 @@ namespace Bank.Management.Console.Services.Foundations.Customers
             this.loggingBroker.LogError("Client has no information.");
             return false;
         }
+
+        public string GetAllCustomer()
+        {
+            var clientInfo = this.customerBroker.ReadAllCustormer();
+
+            if (clientInfo is not null)
+            {
+                this.loggingBroker.LogInformation(clientInfo.ToString());
+            }
+            else
+            {
+                this.loggingBroker.LogError("The database is full of information.");
+            }
+
+            return clientInfo;
+        }
     }
 }
