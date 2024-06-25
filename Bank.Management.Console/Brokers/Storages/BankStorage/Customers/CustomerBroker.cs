@@ -72,8 +72,10 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
             string[] clientInfo = File.ReadAllLines(filePath);
             File.WriteAllText(filePath, string.Empty);
 
-            if (IsAccountNumberCheck(firstAccountNumber)
-                && IsAccountNumberCheck(secondAccountNumber))
+            string[] firstClientInfoLine = clientInfo[firstIndex].Split('*');
+            string[] secondClinetInfoLine = clientInfo[secondIndex].Split('*');
+
+            if (Convert.ToDecimal(firstClientInfoLine[2]) >= money)
             {
                 int firstIndex = this.GetIndex(firstAccountNumber);
                 int secondIndex = this.GetIndex(secondAccountNumber);
@@ -81,13 +83,24 @@ namespace Bank.Management.Console.Brokers.Storages.BankStorage.Customers
                 if (Convert.ToDecimal(clientInfo[firstIndex].Split('*')[2]) >= money)
                 {
                     File.WriteAllText(filePath, string.Empty);
-                    clientInfo[firstIndex].Split('*')[2] =
-                        (Convert.ToDecimal(clientInfo[firstIndex].Split('*')[2]) - money).ToString();
-                    clientInfo[secondIndex].Split('*')[2] =
-                             (Convert.ToDecimal(clientInfo[secondIndex].Split('*')[2]) + money).ToString();
+                    decimal firstAccount = Convert.ToDecimal(firstClientInfoLine[2]);
+                    firstAccount -= money;
+                    firstClientInfoLine[2] = firstAccount.ToString();
+
+                    decimal secondAccount = Convert.ToDecimal(secondClinetInfoLine[2]);
+                    secondAccount += money;
+                    secondClinetInfoLine[2] = secondAccount.ToString();
 
                     for (int itarator = 0; itarator < clientInfo.Length; itarator++)
                     {
+                        if (itarator == firstIndex)
+                        {
+                            clientInfo[itarator] = $"{firstClientInfoLine[0]}*{firstClientInfoLine[1]}*{firstClientInfoLine[2]}";
+                        }
+                        else if (itarator == secondIndex)
+                        {
+                            clientInfo[itarator] = $"{secondClinetInfoLine[0]}*{secondClinetInfoLine[1]}*{secondClinetInfoLine[2]}";
+                        }
                         string clientLineInfo = clientInfo[itarator];
                         File.AppendAllText(filePath, clientLineInfo + "\n");
                     }
